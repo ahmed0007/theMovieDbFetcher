@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Jobs\FetchRecentMovies;
 use App\Jobs\FetchTopRatedMovies;
 use Illuminate\Console\Scheduling\Schedule;
+use App\Console\Commands\MovieCron;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -15,7 +16,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        MovieCron::class
     ];
 
     /**
@@ -26,13 +27,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        $schedule->job(new FetchRecentMovies())
-            ->hourly();
-
-        $schedule->job(new FetchTopRatedMovies())
-        ->hourly();
+        $schedule->command('movie:cron')
+                 ->everyMinute();
+        // $schedule->job(new FetchTopRatedMovies())
+        // ->everyFiveMinutes();
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\FetchGenres;
+use App\Jobs\FetchTopRatedMovies;
 use Illuminate\Console\Command;
+
 
 class MovieCron extends Command
 {
@@ -37,6 +40,13 @@ class MovieCron extends Command
      */
     public function handle()
     {
-        //
+
+        FetchGenres::withChain([
+            new FetchTopRatedMovies,
+        ])->dispatch();
+
+        // FetchGenres::dispatch();
+        // FetchTopRatedMovies::dispatch();
+
     }
 }

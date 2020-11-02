@@ -1,5 +1,7 @@
 <?php
 
+use App\Repositories\Genre\GenreRepository;
+use App\Repositories\Movie\MovieRepository;
 use Zttp\Zttp;
 use Zttp\ZttpResponse;
 
@@ -15,22 +17,5 @@ use Zttp\ZttpResponse;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    $response = Zttp::get('https://api.themoviedb.org/3/movie/latest', [
-        'api_key' => '276acd1bebcfb5c2a5ed2e93c3e12786',
-    ]);
-
-    dump($response->json());
-
-
-    // https://api.themoviedb.org/3/movie/top_rated?api_key=276acd1bebcfb5c2a5ed2e93c3e12786&language=en-US&page=2
-
-    $response = Zttp::get('https://api.themoviedb.org/3/movie/top_rated', [
-        'api_key'  => '276acd1bebcfb5c2a5ed2e93c3e12786',
-        'language' => 'en-US',
-        'page'=> '2'
-    ]);
-
-    dump($response->json());
-
+    return view('welcome');
 });

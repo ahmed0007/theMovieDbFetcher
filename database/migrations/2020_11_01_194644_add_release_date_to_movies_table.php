@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMovie extends Migration
+class AddReleaseDateToMoviesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateMovie extends Migration
      */
     public function up()
     {
-        Schema::create('movie', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::table('movies', function (Blueprint $table) {
+            $table->string('release_date', 10)->after('id');
         });
     }
 
@@ -26,6 +25,8 @@ class CreateMovie extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movie');
+        Schema::table('movies', function (Blueprint $table) {
+            $table->dropColumn('release_date');
+        });
     }
 }

@@ -2,17 +2,14 @@
 
 namespace App\Jobs;
 
-
-use App\Repositories\Movie\MovieRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use \App\Repositories\Genre\GenreRepository;
 
-
-
-class FetchTopRatedMovies implements ShouldQueue
+class FetchGenres implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -33,7 +30,6 @@ class FetchTopRatedMovies implements ShouldQueue
      */
     public function handle()
     {
-        \Log::info('handle FetchTopRatedMovies');
-        (new MovieRepository())->dbSeed();
+        (new GenreRepository())->dbSeed();
     }
 }
