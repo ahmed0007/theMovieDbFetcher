@@ -2,11 +2,12 @@
 
 namespace App\Repositories\Movie;
 
+use App\Repositories\Movie\MovieRepositoryContract;
 use App\Models\Movie;
 use App\Models\MovieTopRatedPageTracker;
 use App\Traits\ApiFeedable;
 
-class MovieRepository
+class MovieRepository implements MovieRepositoryContract
 {
     use ApiFeedable;
 
@@ -34,10 +35,16 @@ class MovieRepository
     }
 
     public function all(){
+        return $this->movie->with('genres')->get();
         // To-Do
         // Return all Movies stored in our dabases.
 
     }
+
+    public function filter($movieFilters){
+        return $this->movie->filter($movieFilters)->with('genres')->get();
+    }
+
 
     public function findById(){
 

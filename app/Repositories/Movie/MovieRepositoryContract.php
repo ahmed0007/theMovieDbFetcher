@@ -10,7 +10,7 @@ interface MovieRepositoryContract{
 
     public function findById();
 
-    public function create();
+    public function create($payload);
 
     public function update();
 

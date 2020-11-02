@@ -13,6 +13,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        $this->app->bind(Genre::class, function ($app) {
+            return new Genre();
+        });
+
+        // $this->app->when(GenreRepository::class)
+        //   ->needs(Genre::class)
+        //   ->give(function () {
+        //       return  (new Genre());
+        //   });
         //
     }
 

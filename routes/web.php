@@ -19,3 +19,7 @@ use Zttp\ZttpResponse;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/movies', 'Api\V1\MovieController@index');
+
+

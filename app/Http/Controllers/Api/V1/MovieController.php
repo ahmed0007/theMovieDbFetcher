@@ -4,21 +4,28 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\MovieRepository;
+use App\Filters\MovieFilters;
+use App\Repositories\Movie\MovieRepositoryContract;
 
 class MovieController extends Controller
 {
 
     private $movieRepository;
 
-    public function __construct(MovieRepository $movieRepository)
+    public function __construct(MovieRepositoryContract $movieRepository)
     {
         $this->movieRepository = $movieRepository;
     }
 
 
-    public function index(){
-        $movies = $this->movieRepository->all();
+    public function index(MovieFilters $movieFilters){
+
+        // dd($this->movieRepository);
+
+
+        $movies = $this->movieRepository->filter($movieFilters);
+
+        // $movies = $this->movieRepository->all();
         return $movies;
     }
 

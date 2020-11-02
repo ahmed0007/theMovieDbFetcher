@@ -14,8 +14,12 @@ class Movie extends Model
                 config('movieDb.genre.model'),
                 config('movieDb.relation_table'),
                 config('movieDb.foreign_pivot_key', 'movie_id'),
-                config('promocodes.related_pivot_key', 'genre_id'))
-            ->withPivot('croned_at');
+                config('promocodes.related_pivot_key', 'genre_id'));
+    }
+
+
+    public function scopeFilter($query, $filters){
+        return $filters->apply($query);
     }
 
     public function attachGenres($payload){
